@@ -1,0 +1,26 @@
+{
+  "name": "betterprinting",
+  "version": "0.0.1",
+  "description": "Alternative for writing console dot whatever all the time",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thmtvz/betterPrinting.git"
+  },
+  "keywords": [
+    "lazyness",
+    "console.log",
+    "printf",
+    "puts",
+    "print"
+  ],
+  "author": "Thiago Vaz",
+  "license": " GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/thmtvz/betterPrinting/issues"
+  },
+  "homepage": "https://github.com/thmtvz/betterPrinting#readme"
+}
