@@ -16,12 +16,16 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import print from "./print.js";
-import {
-    printWarn,
-    printDir,
-    printTable,
-} from "./print.js";
+function printFactory(fn){
+    return function(...args){
+	fn(...args);
+    }
+}
+
+var print = printFactory(console.log);
+var printWarn = printFactory(console.warn);
+var printDir = printFactory(console.dir);
+var printTable = printFactory(console.table);
 
 export {
     print as default,
