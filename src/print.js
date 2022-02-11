@@ -16,20 +16,25 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import "./globals.js";
+import cons from "./console.js";
+
 function printFactory(fn){
     return function(...args){
 	fn(...args);
     }
 }
 
-var print = printFactory(console.log);
-var printWarn = printFactory(console.warn);
-var printDir = printFactory(console.dir);
-var printTable = printFactory(console.table);
+var print = printFactory(cons.log);
+var warn = printFactory(cons.warn);
+var dir = printFactory(cons.dir);
+var table = printFactory(cons.table);
+var count = printFactory(cons.count);
 
 export {
     print as default,
-    printWarn,
-    printDir,
-    printTable,
+    warn,
+    dir,
+    table,
+    count,
 };

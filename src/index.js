@@ -16,11 +16,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import "./globals.js";
 import print from "./print.js";
 import {
-    printWarn,
-    printDir,
-    printTable,
+    warn,
+    dir,
+    table,
 } from "./print.js";
 import {
     chrono,
@@ -29,9 +30,9 @@ import {
 
 export {
     print as default,
-    printWarn,
-    printDir,
-    printTable,
+    warn,
+    dir,
+    table,
     chrono,
     Timing,
 };
