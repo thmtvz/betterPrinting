@@ -22,10 +22,16 @@ import {
     printDir,
     printTable,
 } from "./print.js";
+import {
+    chrono,
+    Timing,
+} from "./timing.js";
 
 export {
     print as default,
     printWarn,
     printDir,
     printTable,
+    chrono,
+    Timing,
 };
