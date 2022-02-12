@@ -16,29 +16,26 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import print from "./print.js";
-import {
-    warn,
-    dir,
-    table,
-    count,
-} from "./print.js";
-import {
-    chrono,
-    Timing,
-} from "./timing.js";
+import "./globals.js";
+import { Console } from "console";
+
+const OPTIONS = {
+    stdout: getStream(process.env.STDOUT) || STDOUT,
+    stderr: getStream(process.env.STDERR) || STDERR,
+    ignoreErrors: getStream(process.env.IGNORE_ERRORS) || true,
+    colorMode: getStream(process.env.COLOR_MODE) || 'auto',
+    groupIndentation: getStream(process.env.GROUP_INDENTATION) || 2
+};
+
+var cons = new Console(OPTIONS)
+
+function getStream(intended){
+    if(!intended) return undefined;
+    //if is a filename, fs.get...
+    //if is a adress, net.write...
+    //if is something weird, throw error
+} //TODO if filename, write to file instead, if net, write to it then.
 
 export {
-    //printing functions
-    print,
-    warn,
-    dir,
-    table,
-    count,
-
-    //instances
-    chrono,
-    
-    //classes
-    Timing,
-};
+    cons as default,
+}
