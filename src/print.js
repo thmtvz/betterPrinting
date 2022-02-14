@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import "./globals.js";
 import cons from "./console.js";
 
 function printFactory(fn){
@@ -26,10 +25,16 @@ function printFactory(fn){
 }
 
 var print = printFactory(cons.log);
-var warn = printFactory(cons.warn);
-var dir = printFactory(cons.dir);
+var warn = printFactory(cons.warn); // this is a alias for cons.error
+var dir = printFactory(cons.dir); // TODO: make dir better, by using global constants as options 
 var table = printFactory(cons.table);
-var count = printFactory(cons.count);
+var count = printFactory(cons.count); // TODO: make this as the timing  
+var assert = printFactory(cons.assert);
+var clear = printFactory(cons.clear);
+var debug; // debug is a alias for console.log, so is print, then, no debug();
+var error = printFactory(cons.error);
+var trace = printFactory(cons.trace);
+
 
 export {
     print as default,
@@ -37,4 +42,7 @@ export {
     dir,
     table,
     count,
+    assert,
+    clear,
+    
 };

@@ -19,15 +19,32 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import "./globals.js";
 import { Console } from "console";
 
-const OPTIONS = {
-    stdout: getStream(process.env.STDOUT) || STDOUT,
-    stderr: getStream(process.env.STDERR) || STDERR,
-    ignoreErrors: getStream(process.env.IGNORE_ERRORS) || true,
-    colorMode: getStream(process.env.COLOR_MODE) || 'auto',
-    groupIndentation: getStream(process.env.GROUP_INDENTATION) || 2
-};
+class Cons {
+    constructor(){
+	this.console = undefined;
+	this.proxy = undefined; // TODO: make a nice proxy
+	this.options = {
+	    stdout: getStream(process.env.STDOUT) || STDOUT,
+	    stderr: getStream(process.env.STDERR) || STDERR,
+	    ignoreErrors: getStream(process.env.IGNORE_ERRORS) || true,
+	    colorMode: getStream(process.env.COLOR_MODE) || 'auto',
+	    groupIndentation: getStream(process.env.GROUP_INDENTATION) || 2,
+	}
+    }
 
-var cons = new Console(OPTIONS)
+    init(){
+	this.console = new Console(this.options)
+    }
+
+    getCons(){
+	if(!this.console) this.init();
+	return this.console;
+    }
+}
+
+var c = new Cons();
+
+var cons = c.getCons();
 
 function getStream(intended){
     if(!intended) return undefined;
