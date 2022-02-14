@@ -44,5 +44,7 @@ export {
     count,
     assert,
     clear,
+    error,
+    trace,
     
 };

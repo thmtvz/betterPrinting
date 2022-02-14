@@ -41,6 +41,10 @@ class Cons {
     makeProxy(handler){
 	this.proxy = handler; // TODO: make this a factory.
     }
+
+    setOption(option, value){
+	this.options[option] = value;
+    }
 }
 
 var c = new Cons();
@@ -48,6 +52,7 @@ var p = new Proxy(c.getCons(), {
     apply(target, thisArg, argumentsList){
 	// Lazy init for the console object,
 	// only start it when someone tries to use it!
+	// then, makes itself the console or proxy object.
 	target(argumentsList);
 	p = c.getCons();
     }
