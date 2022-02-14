@@ -22,29 +22,37 @@ import { Console } from "console";
 class Cons {
     constructor(){
 	this.console = undefined;
-	this.proxy = undefined; // TODO: make a nice proxy
+	this.proxy = undefined;
 	this.options = {
 	    stdout: getStream(process.env.STDOUT) || STDOUT,
 	    stderr: getStream(process.env.STDERR) || STDERR,
 	    ignoreErrors: getStream(process.env.IGNORE_ERRORS) || true,
 	    colorMode: getStream(process.env.COLOR_MODE) || 'auto',
 	    groupIndentation: getStream(process.env.GROUP_INDENTATION) || 2,
-	}
+	} // TODO: fix this, not all options need the getStream!
     }
-
-    init(){
-	this.console = new Console(this.options)
-    }
-
+    
     getCons(){
-	if(!this.console) this.init();
+	this.console = new Console(this.options);
+	if(this.proxy) return new Proxy(this.console, this.proxy);
 	return this.console;
+    }
+
+    makeProxy(handler){
+	this.proxy = handler; // TODO: make this a factory.
     }
 }
 
 var c = new Cons();
+var p = new Proxy(c.getCons(), {
+    apply(target, thisArg, argumentsList){
+	// Lazy init for the console object,
+	// only start it when someone tries to use it!
+	target(argumentsList);
+	p = c.getCons();
+    }
+})
 
-var cons = c.getCons();
 
 function getStream(intended){
     if(!intended) return undefined;
@@ -54,5 +62,5 @@ function getStream(intended){
 } //TODO if filename, write to file instead, if net, write to it then.
 
 export {
-    cons as default,
+    p as default,
 }
