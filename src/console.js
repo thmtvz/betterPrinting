@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+"use strict";
+
 import "./globals.js";
 import { Console } from "console";
 
@@ -48,12 +50,13 @@ class Cons {
 }
 
 var c = new Cons();
-var p = new Proxy(c.getCons(), {
-    apply(target, thisArg, argumentsList){
+//FIXME this is not working as intended!
+var p = new Proxy(c, {
+    get: function(target, prop, receiver){
 	// Lazy init for the console object,
 	// only start it when someone tries to use it!
 	// then, makes itself the console or proxy object.
-	target(argumentsList);
+	//FIXME
 	p = c.getCons();
     }
 })

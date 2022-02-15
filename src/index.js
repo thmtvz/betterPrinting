@@ -16,12 +16,18 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+"use strict";
+
 import print from "./print.js";
 import {
     warn,
     dir,
     table,
     count,
+    assert,
+    clear,
+    error,
+    trace,
 } from "./print.js";
 import {
     chrono,
@@ -30,11 +36,15 @@ import {
 
 export {
     //printing functions
-    print,
+    print as default,
     warn,
     dir,
     table,
     count,
+    assert,
+    clear,
+    error,
+    trace,
 
     //instances
     chrono,
