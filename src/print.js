@@ -22,7 +22,6 @@ import cons from "./console.js";
 
 function printFactory(fn){
     return function(...args){
-	console.log(fn)
 	fn(...args);
     }
 }

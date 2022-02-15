@@ -20,6 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import "./globals.js";
 import getClassMethodsAndProps from "./utils/getClassMethodsAndProps.js";
+import getStream from "./utils/getStream.js";
 import { Console } from "console";
 
 class Cons {
@@ -66,14 +67,6 @@ var p = new Proxy(c, {
 	return target[prop];
     }
 })
-
-
-function getStream(intended){
-    if(!intended) return undefined;
-    //if is a filename, fs.get...
-    //if is a adress, net.write...
-    //if is something weird, throw error
-} //TODO if filename, write to file instead, if net, write to it then.
 
 export {
     p as default,
