@@ -30,11 +30,10 @@ class Cons {
 	this.options = {
 	    stdout: getStream(process.env.STDOUT) || STDOUT,
 	    stderr: getStream(process.env.STDERR) || STDERR,
-	    ignoreErrors: getStream(process.env.IGNORE_ERRORS) || true,
-	    colorMode: getStream(process.env.COLOR_MODE) || 'auto',
-	    groupIndentation: getStream(process.env.GROUP_INDENTATION) || 2,
+	    ignoreErrors: process.env.IGNORE_ERRORS || true,
+	    colorMode: process.env.COLOR_MODE || 'auto',
+	    groupIndentation: process.env.GROUP_INDENTATION || 2,
 	} // TODO: fix this, not all options need the getStream!
-	  // and not all of this options work with string type.
     }
     
     getCons(){
