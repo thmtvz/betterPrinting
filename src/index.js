@@ -26,6 +26,7 @@ import {
     count,
     assert,
     clear,
+    debug,
     error,
     trace,
 } from "./print.js";
@@ -43,6 +44,7 @@ export {
     count,
     assert,
     clear,
+    debug,
     error,
     trace,
 

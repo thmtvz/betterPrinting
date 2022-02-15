@@ -34,6 +34,7 @@ class Cons {
 	    colorMode: getStream(process.env.COLOR_MODE) || 'auto',
 	    groupIndentation: getStream(process.env.GROUP_INDENTATION) || 2,
 	} // TODO: fix this, not all options need the getStream!
+	  // and not all of this options work with string type.
     }
     
     getCons(){

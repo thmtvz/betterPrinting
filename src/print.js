@@ -33,7 +33,9 @@ var table = printFactory(cons.table);
 var count = printFactory(cons.count); // TODO: make this as the timing  
 var assert = printFactory(cons.assert);
 var clear = printFactory(cons.clear);
-var debug; // debug is a alias for console.log, so is print, then, no debug();
+var debug = function(){
+    throw new Error("Use print() instead"); // debug is a alias for console.log, so is print, then, no debug();
+}
 var error = printFactory(cons.error);
 var trace = printFactory(cons.trace);
 
@@ -46,6 +48,7 @@ export {
     count,
     assert,
     clear,
+    debug,
     error,
     trace,
     
