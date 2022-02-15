@@ -19,6 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 "use strict";
 
 import "./globals.js";
+import getClassMethodsAndProps from "./utils/getClassMethodsAndProps.js";
 import { Console } from "console";
 
 class Cons {
@@ -49,15 +50,20 @@ class Cons {
     }
 }
 
+var propsAndMethods = getClassMethodsAndProps(Cons, new Cons());
+
 var c = new Cons();
-//FIXME this is not working as intended!
 var p = new Proxy(c, {
     get: function(target, prop, receiver){
 	// Lazy init for the console object,
 	// only start it when someone tries to use it!
 	// then, makes itself the console or proxy object.
-	//FIXME
-	p = c.getCons();
+	
+	if(!(propsAndMethods.includes(prop))){
+	    p = c.getCons();
+	    return p[prop];
+	}
+	return target[prop];
     }
 })
 
