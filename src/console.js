@@ -21,6 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import "./globals.js";
 import getClassMethodsAndProps from "./utils/getClassMethodsAndProps.js";
 import getStream from "./utils/getStream.js";
+import getEnv from "./utils/getEnv.js";
 import { Console } from "console";
 
 class Cons {
@@ -28,14 +29,14 @@ class Cons {
 	this.console = undefined;
 	this.proxy = undefined;
 	this.options = {
-	    stdout: getStream(process.env.STDOUT) || STDOUT,
-	    stderr: getStream(process.env.STDERR) || STDERR,
-	    ignoreErrors: process.env.IGNORE_ERRORS || true,
-	    colorMode: process.env.COLOR_MODE || 'auto',
-	    groupIndentation: process.env.GROUP_INDENTATION || 2,
-	} // TODO: fix this, not all options need the getStream!
+	    stdout: getStream(getEnv("STDOUT"), "STDOUT") || STDOUT,
+	    stderr: getStream(getEnv("STDERR"), "STDERR") || STDERR,
+	    ignoreErrors: getEnv("IGNORE_ERRORS") || true,
+	    colorMode: getEnv("COLOR_MODE") || 'auto',
+	    groupIndentation: getEnv("GROUP_INDENTATION") || 2,
+	}
     }
-    
+
     getCons(){
 	this.console = new Console(this.options);
 	if(this.proxy) return new Proxy(this.console, this.proxy);
@@ -58,7 +59,7 @@ var p = new Proxy(c, {
     get: function(target, prop, receiver){
 	// Lazy init for the console object,
 	// only start it when someone tries to use it!
-	// then, makes itself the console or proxy object.
+	// on start, makes itself the console or proxy object.
 	
 	if(!(propsAndMethods.includes(prop))){
 	    p = c.getCons();

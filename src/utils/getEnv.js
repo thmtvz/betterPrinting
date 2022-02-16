@@ -18,39 +18,34 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
-import print from "./print.js";
+import atof from "./atof.js";
 import {
-    warn,
-    dir,
-    table,
-    count,
-    assert,
-    clear,
-    debug,
-    error,
-    trace,
-} from "./print.js";
-import {
-    chrono,
-    Timing,
-} from "./timing.js";
+    env
+} from "process";
+
+function getEnv(envvar){
+    let value = env[envvar];
+    
+    if(!value || (value === "undefined")){
+	return undefined;
+    } else if(value === "null"){
+	return null;
+    } else if((value == "true") ||
+	      (value == "false")){
+	return value == "true" ? true : false;
+    } else if(!isNaN(atof(value))){
+	return atof(value);
+    }
+    try{
+	var finalValue = JSON.parse(value);
+    } catch(e) {
+	finalValue = value;
+    }
+    
+    return finalValue;
+}
 
 export {
-    //printing functions
-    print as default,
-    warn,
-    dir,
-    table,
-    count,
-    assert,
-    clear,
-    debug,
-    error,
-    trace,
-
-    //instances
-    chrono,
-
-    //classes
-    Timing,
-};
+    getEnv as default,
+    
+}

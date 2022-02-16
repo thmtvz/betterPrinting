@@ -18,39 +18,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
-import print from "./print.js";
-import {
-    warn,
-    dir,
-    table,
-    count,
-    assert,
-    clear,
-    debug,
-    error,
-    trace,
-} from "./print.js";
-import {
-    chrono,
-    Timing,
-} from "./timing.js";
+function atof(str){
+    let n = parseFloat(str);
+    if(String(n) === str) return n;
+    return NaN;
+}
 
 export {
-    //printing functions
-    print as default,
-    warn,
-    dir,
-    table,
-    count,
-    assert,
-    clear,
-    debug,
-    error,
-    trace,
-
-    //instances
-    chrono,
-
-    //classes
-    Timing,
-};
+    atof as default,
+    
+}

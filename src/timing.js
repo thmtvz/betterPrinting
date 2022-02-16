@@ -22,7 +22,7 @@ class Timing {
     constructor(){
 	this.labels = new Set();
     }
-    
+g
     start(label){
 	if(!label) throw new Error("No label provided");
 	if(this.labels.has(label)) throw new Error("Label already in use!");
@@ -35,7 +35,7 @@ class Timing {
 	if(!this.labels.has(label)) throw new Error(`Can't find \"${label}\" label`);
 	console.timeLog(label);
     }
-    
+
     stop(label){
 	if(!label) throw new Error("No label provided");
 	if(!this.labels.has(label)) throw new Error(`Can't find \"${label}\" label`);

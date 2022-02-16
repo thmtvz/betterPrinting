@@ -29,5 +29,5 @@ function getClassMethodsAndProps(className, dummyInstance){
 
 export {
     getClassMethodsAndProps as default,
-    
+
 }

@@ -28,9 +28,9 @@ function printFactory(fn){
 
 var print = printFactory(cons.log);
 var warn = printFactory(cons.warn); // this is a alias for cons.error
-var dir = printFactory(cons.dir); // TODO: make dir better, by using global constants as options 
+var dir = printFactory(cons.dir); // TODO: make dir better, by using global constants as options
 var table = printFactory(cons.table);
-var count = printFactory(cons.count); // TODO: make this as the timing  
+var count = printFactory(cons.count); // TODO: make this as the timing
 var assert = printFactory(cons.assert);
 var clear = printFactory(cons.clear);
 var debug = function(){
@@ -51,5 +51,5 @@ export {
     debug,
     error,
     trace,
-    
+
 };

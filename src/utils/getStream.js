@@ -18,14 +18,39 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
-function getStream(intended){
-    if(!intended) return undefined;
-    //if is a filename, fs.get...
-    //if is a adress, net.write...
-    //if is something weird, throw error
-} //TODO if filename, write to file instead, if net, write to it then.
+import fs from "fs/promises";
+import path from "path";
+
+
+function getStream(intendedValue, intendedFor){
+    if(!intendedValue) return undefined;
+    else if(isAddress(intendedValue)) return getNetWriteStream(intendedValue);
+    else if(isFileName(intendedValue)) return getFileAppendStream(intendedValue);
+    throw new Error(`Unrecognized value for: ${intendedFor}, ${intendedValue}`);
+}
 
 export {
     getStream as default,
-    
+
+}
+
+function isFileName(str){
+    let regex = /jonas/;
+    return regex.test(str) ? true : false;
+}
+
+async function getFileAppendStream(str){
+    let dir = getDir("./");
+    let file = await fs.open(str, "a");
+    let stream = await file.createWriteStream();
+    return stream;
+}// TODO: assume str is a path.
+
+async function getDir(dirname){
+    try{
+	var dir = await fs.readdir(dirname, {});
+    } catch(error){
+	throw error;
+    }
+    return dir;
 }
