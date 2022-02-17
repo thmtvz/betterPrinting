@@ -25,16 +25,10 @@ import getEnv from "./utils/getEnv.js";
 import { Console } from "console";
 
 class Cons {
-    constructor(){
+    constructor(options){
 	this.console = undefined;
 	this.proxy = undefined;
-	this.options = {
-	    stdout: getStream(getEnv("STDOUT"), "STDOUT") || STDOUT,
-	    stderr: getStream(getEnv("STDERR"), "STDERR") || STDERR,
-	    ignoreErrors: getEnv("IGNORE_ERRORS") || true,
-	    colorMode: getEnv("COLOR_MODE") || 'auto',
-	    groupIndentation: getEnv("GROUP_INDENTATION") || 2,
-	}
+	this.options = options;
     }
 
     getCons(){
@@ -52,15 +46,22 @@ class Cons {
     }
 }
 
-var propsAndMethods = getClassMethodsAndProps(Cons, new Cons());
+var propsAndMethods = getClassMethodsAndProps(Cons, new Cons({}));
 
-var c = new Cons();
+var OPTIONS = await optionsFactory(
+    getEnv("STDOUT"),
+    getEnv("STDERR"),
+    getEnv("IGNORE_ERRORS"),
+    getEnv("COLOR_MODE"),
+    getEnv("GROUP_INDENTATION")
+);
+
+var c = new Cons(OPTIONS);
 var p = new Proxy(c, {
     get: function(target, prop, receiver){
 	// Lazy init for the console object,
 	// only start it when someone tries to use it!
 	// on start, makes itself the console or proxy object.
-	
 	if(!(propsAndMethods.includes(prop))){
 	    p = c.getCons();
 	    return p[prop];
@@ -71,4 +72,20 @@ var p = new Proxy(c, {
 
 export {
     p as default,
+}
+
+async function optionsFactory(
+    stdout,
+    stderr,
+    ignoreErrors,
+    colorMode,
+    groupIndentation
+){
+    var opt = {};
+    opt.stdout = await getStream(stdout, "STDOUT") || STDOUT;
+    opt.stderr = await getStream(stderr, "STDERR") || STDERR;
+    opt.ignoreErrors = ignoreErrors || true;
+    opt.colorMode = colorMode || "auto";
+    opt.groupIndentation = groupIndentation || 2;
+    return opt;
 }

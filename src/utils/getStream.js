@@ -18,15 +18,17 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
+import "../globals.js";
 import fs from "fs/promises";
+import fSync from "fs";
 import path from "path";
 
 
 function getStream(intendedValue, intendedFor){
-    if(!intendedValue) return undefined;
+    if(!intendedValue) return Promise.resolve(undefined);
     else if(isAddress(intendedValue)) return getNetWriteStream(intendedValue);
-    else if(isFileName(intendedValue)) return getFileAppendStream(intendedValue);
-    throw new Error(`Unrecognized value for: ${intendedFor}, ${intendedValue}`);
+    else if(isFileNameAllowed(intendedValue)) return getFileAppendStream(intendedValue);
+    throw new Error(`Unrecognized or invalid value for ${intendedFor}: ${intendedValue}`);
 }
 
 export {
@@ -34,23 +36,33 @@ export {
 
 }
 
-function isFileName(str){
-    let regex = /jonas/;
-    return regex.test(str) ? true : false;
+function isFileNameAllowed(filename){
+    if(typeof filename === "object") return false;
+    let forbiddenFileNames = getDir(path.dirname(filename));
+    forbiddenFileNames = forbiddenFileNames.filter(name => name.slice(-4) !== ".log");
+    filename = path.basename(filename);
+    if(filename === true) return false;
+    else if(forbiddenFileNames.includes(filename)) return false;
+    return true;
 }
 
-async function getFileAppendStream(str){
-    let dir = getDir("./");
-    let file = await fs.open(str, "a");
-    let stream = await file.createWriteStream();
+async function getFileAppendStream(filename){
+    let file =  await fs.open(filename, "a");
+    let stream = file.createWriteStream();
     return stream;
-}// TODO: assume str is a path.
+}
 
-async function getDir(dirname){
+function getDir(dirname){
     try{
-	var dir = await fs.readdir(dirname, {});
+	var dir = fSync.readdirSync(dirname, {});
     } catch(error){
 	throw error;
     }
     return dir;
 }
+
+function isAddress(){
+    return false;
+}
+
+function getNetWriteStream(){}

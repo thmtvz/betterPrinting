@@ -17,5 +17,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 "use strict";
 
-global.STDOUT = process.stdout
-global.STDERR = process.stderr
+global.STDOUT = process.stdout;
+global.STDERR = process.stderr;
+global.DIRNAME = process.cwd();
