@@ -20,28 +20,22 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import cons from "./console.js";
 
-function printFactory(fn){
-    return function(...args){
-	fn(...args);
-    }
-}
-
-var print = printFactory(cons.log);
-var warn = printFactory(cons.warn); // this is a alias for cons.error
-var dir = printFactory(cons.dir); // TODO: make dir better, by using global constants as options
-var table = printFactory(cons.table);
-var count = printFactory(cons.count); // TODO: make this as the timing
-var assert = printFactory(cons.assert);
-var clear = printFactory(cons.clear);
+var print = printFactoryLazy("log");
+var warn = printFactoryLazy("warn"); // this is a alias for  error
+var dir = printFactoryLazy("dir"); // TODO: make dir better, by using global constants as options
+var table = printFactoryLazy("table");
+var count = printFactoryLazy("count"); // TODO: make this as the timing
+var assert = printFactoryLazy("assert");
+var clear = printFactoryLazy("clear");
 var debug = function(){
     throw new Error("Use print() instead"); // debug is a alias for console.log, so is print, then, no debug();
 }
-var error = printFactory(cons.error);
-var trace = printFactory(cons.trace);
-
+var error = printFactoryLazy("error");
+var trace = printFactoryLazy("trace");
 
 export {
     print as default,
+    print,
     warn,
     dir,
     table,
@@ -53,3 +47,9 @@ export {
     trace,
 
 };
+
+function printFactoryLazy(fn){
+    return function(...args){
+	cons[fn](...args)
+    }
+}

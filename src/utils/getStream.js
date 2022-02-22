@@ -20,14 +20,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import "../globals.js";
 import fs from "fs/promises";
-import fSync from "fs";
 import path from "path";
 
 
-function getStream(intendedValue, intendedFor){
-    if(!intendedValue) return Promise.resolve(undefined);
+async function getStream(intendedValue, intendedFor){
+    //This is intended for settings via enviroment only.
+    if(!intendedValue) return undefined;
     else if(isAddress(intendedValue)) return getNetWriteStream(intendedValue);
-    else if(isFileNameAllowed(intendedValue)) return getFileAppendStream(intendedValue);
+    else if(await isFileNameAllowed(intendedValue)) return getFileAppendStream(intendedValue);
     throw new Error(`Unrecognized or invalid value for ${intendedFor}: ${intendedValue}`);
 }
 
@@ -36,13 +36,13 @@ export {
 
 }
 
-function isFileNameAllowed(filename){
+async function isFileNameAllowed(filename){
     if(typeof filename === "object") return false;
-    let forbiddenFileNames = getDir(path.dirname(filename));
+    else if(filename == true) return false;
+    let forbiddenFileNames = await getDir(path.dirname(filename));
     forbiddenFileNames = forbiddenFileNames.filter(name => name.slice(-4) !== ".log");
     filename = path.basename(filename);
-    if(filename === true) return false;
-    else if(forbiddenFileNames.includes(filename)) return false;
+    if(forbiddenFileNames.includes(filename)) return false;
     return true;
 }
 
@@ -52,9 +52,9 @@ async function getFileAppendStream(filename){
     return stream;
 }
 
-function getDir(dirname){
+async function getDir(dirname){
     try{
-	var dir = fSync.readdirSync(dirname, {});
+	var dir = fs.readdir(dirname, {});
     } catch(error){
 	throw error;
     }

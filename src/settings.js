@@ -18,39 +18,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
-import {
-    print,
-    warn,
-    dir,
-    table,
-    count,
-    assert,
-    clear,
-    debug,
-    error,
-    trace,
-} from "./print.js";
-import {
-    chrono,
-} from "./timing.js";
-import {
-    setOption,
-    makeConsProxy,
-} from "./settings.js";
+import cons from "./console.js";
+
+function setOption(option, value){
+    cons.setOption(option, value);
+}
+
+function makeConsProxy(prx){
+    cons.makeProxy(prx);
+}
 
 export {
-    print as default,
-    print,
-    warn,
-    dir,
-    table,
-    count,
-    assert,
-    clear,
-    debug,
-    error,
-    trace,
-    chrono,
     setOption,
     makeConsProxy,
-};
+    
+}

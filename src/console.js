@@ -79,9 +79,8 @@ async function optionsFactory(
     stderr,
     ignoreErrors,
     colorMode,
-    groupIndentation
-){
-    var opt = {};
+    groupIndentation){
+    let opt = {};
     opt.stdout = await getStream(stdout, "STDOUT") || STDOUT;
     opt.stderr = await getStream(stderr, "STDERR") || STDERR;
     opt.ignoreErrors = ignoreErrors || true;
