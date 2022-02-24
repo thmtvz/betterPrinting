@@ -17,6 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 "use strict";
 
-global.STDOUT = process.stdout;
-global.STDERR = process.stderr;
-global.DIRNAME = process.cwd();
+const STDOUT = process.stdout;
+const STDERR = process.stderr;
+const DIRNAME = process.cwd();
+
+export {
+    STDOUT,
+    STDERR,
+    DIRNAME,
+    
+}

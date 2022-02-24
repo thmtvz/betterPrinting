@@ -1,3 +1,4 @@
+
 /*
 Better names for printing in the console!
 Copyright (C) 2022  Thiago Vaz
@@ -35,7 +36,7 @@ import {
 } from "./timing.js";
 import {
     setOption,
-    makeConsProxy,
+    setConsProxy,
 } from "./settings.js";
 
 export {
@@ -52,5 +53,7 @@ export {
     trace,
     chrono,
     setOption,
-    makeConsProxy,
+    setConsProxy,
 };
+
+//TODO: make this via package.json and not here

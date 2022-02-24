@@ -20,11 +20,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 function getClassMethodsAndProps(className, dummyInstance){
     let methods = Object.getOwnPropertyNames(className.prototype);
+    let cSym = Object.getOwnPropertySymbols(className.prototype);
     let props = Object.getOwnPropertyNames(dummyInstance);
-    //TODO get symbols
-    return methods.concat(props).filter(function(e){
-	return e !== 'constructor';
+    let oSym = Object.getOwnPropertySymbols(dummyInstance);
+    let all = methods.concat(cSym, props, oSym).filter(function(element){
+	return element !== 'constructor';
     });
+    return all ;
 }
 
 export {

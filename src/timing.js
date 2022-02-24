@@ -56,5 +56,5 @@ var chrono = new Timing();
 
 export {
     chrono,
-    Timing,
+
 }

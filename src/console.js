@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
-import "./globals.js";
+import * as glbs from "./globals.js";
 import getClassMethodsAndProps from "./utils/getClassMethodsAndProps.js";
 import getStream from "./utils/getStream.js";
 import getEnv from "./utils/getEnv.js";
@@ -38,7 +38,7 @@ class Cons {
     }
 
     makeProxy(handler){
-	this.proxy = handler; // TODO: make this a factory.
+	this.proxy = handler;
     }
 
     setOption(option, value){
@@ -80,9 +80,10 @@ async function optionsFactory(
     ignoreErrors,
     colorMode,
     groupIndentation){
+    
     let opt = {};
-    opt.stdout = await getStream(stdout, "STDOUT") || STDOUT;
-    opt.stderr = await getStream(stderr, "STDERR") || STDERR;
+    opt.stdout = await getStream(stdout, "STDOUT") || glbs.STDOUT;
+    opt.stderr = await getStream(stderr, "STDERR") || glbs.STDERR;
     opt.ignoreErrors = ignoreErrors || true;
     opt.colorMode = colorMode || "auto";
     opt.groupIndentation = groupIndentation || 2;

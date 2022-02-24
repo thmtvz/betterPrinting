@@ -24,12 +24,12 @@ function setOption(option, value){
     cons.setOption(option, value);
 }
 
-function makeConsProxy(prx){
+function setConsProxy(prx){
     cons.makeProxy(prx);
 }
 
 export {
     setOption,
-    makeConsProxy,
+    setConsProxy,
     
 }

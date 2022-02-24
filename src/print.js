@@ -20,11 +20,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import cons from "./console.js";
 
+//TODO: make an option for warning the aliases; 
 var print = printFactoryLazy("log");
-var warn = printFactoryLazy("warn"); // this is a alias for  error
-var dir = printFactoryLazy("dir"); // TODO: make dir better, by using global constants as options
+var warn = printFactoryLazy("warn");
+var dir = printFactoryLazy("dir");
 var table = printFactoryLazy("table");
-var count = printFactoryLazy("count"); // TODO: make this as the timing
+var count = printFactoryLazy("count");
 var assert = printFactoryLazy("assert");
 var clear = printFactoryLazy("clear");
 var debug = function(){

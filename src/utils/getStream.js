@@ -18,7 +18,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
-import "../globals.js";
 import fs from "fs/promises";
 import path from "path";
 
@@ -28,7 +27,7 @@ async function getStream(intendedValue, intendedFor){
     if(!intendedValue) return undefined;
     else if(isAddress(intendedValue)) return getNetWriteStream(intendedValue);
     else if(await isFileNameAllowed(intendedValue)) return getFileAppendStream(intendedValue);
-    throw new Error(`Unrecognized or invalid value for ${intendedFor}: ${intendedValue}`);
+    throw new Error(`Unrecognized or invalid value${(intendedFor ? " for " + intendedFor + ": " + intendedValue : ": " + intendedValue)}`);
 }
 
 export {
@@ -62,6 +61,8 @@ async function getDir(dirname){
 }
 
 function isAddress(){
+    //For now, no getNetWriteStream exist, so it prevents it
+    //by being only false!
     return false;
 }
 
