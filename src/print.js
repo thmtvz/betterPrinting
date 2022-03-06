@@ -20,8 +20,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import cons from "./console.js";
 
-//TODO: make an option for warning the aliases; 
-var print = printFactoryLazy("log");
+//TODO: make an option for warning the aliases like debug()
+var print = printFactoryLazy("print");
+var log = printFactoryLazy("log");
 var warn = printFactoryLazy("warn");
 var dir = printFactoryLazy("dir");
 var table = printFactoryLazy("table");
@@ -37,6 +38,7 @@ var trace = printFactoryLazy("trace");
 export {
     print as default,
     print,
+    log,
     warn,
     dir,
     table,

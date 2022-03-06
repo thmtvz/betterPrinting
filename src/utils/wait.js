@@ -16,49 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-"use strict";
+async function wait(time){
+    return new Promise(function(res, rej){
+	setTimeout(res, time * 1000);
+    });
+}
 
-import {
-    print,
-    log,
-    warn,
-    dir,
-    table,
-    count,
-    assert,
-    clear,
-    debug,
-    error,
-    trace,
-} from "./print.js";
-import {
-    chrono,
-} from "./timing.js";
-import {
-    setOption,
-    setConsProxy,
-    OptSettings,
-    PrxSettings,
-} from "./settings.js";
-
-export {
-    print as default,
-    print,
-    log,
-    warn,
-    dir,
-    table,
-    count,
-    assert,
-    clear,
-    debug,
-    error,
-    trace,
-    chrono,
-    setOption,
-    setConsProxy,
-    OptSettings,
-    PrxSettings,
-};
-
-//TODO: make this via package.json and not here
+export{
+    wait as default,
+    
+}

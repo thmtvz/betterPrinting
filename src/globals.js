@@ -17,13 +17,44 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 "use strict";
 
-const STDOUT = process.stdout;
-const STDERR = process.stderr;
-const DIRNAME = process.cwd();
+//Private, please avoid outside core!
+const _STDOUT = process.stdout;
+const _STDERR = process.stderr;
+const _DIRNAME = process.cwd();
+
+//Non private, usable for users
+const PRINT = "print";
+const LOG = "log";
+const WARN = "warn";
+const DIR = "dir";
+const TABLE = "table";
+const COUNT = "count";
+const ASSERT = "assert";
+const CLEAR = "clear";
+const DEBUG = "debug";
+const ERROR = "error";
+const TRACE = "trace";
+const TIME = "time";
+const TIMELOG = "timelog";
+const TIMEEND = "timeend";
 
 export {
-    STDOUT,
-    STDERR,
-    DIRNAME,
+    _STDOUT,
+    _STDERR,
+    _DIRNAME,
+    PRINT,
+    LOG,
+    WARN,
+    DIR,
+    TABLE,
+    COUNT,
+    ASSERT,
+    CLEAR,
+    DEBUG,
+    ERROR,
+    TRACE,
+    TIME,
+    TIMELOG,
+    TIMEEND,
     
 }

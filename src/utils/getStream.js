@@ -16,10 +16,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+// move file related stuff to its own file
 "use strict";
 
 import fs from "fs/promises";
 import path from "path";
+import SimpleHttpMq from "./simpleHttpMq.js";
 
 
 async function getStream(intendedValue, intendedFor){
@@ -60,10 +62,13 @@ async function getDir(dirname){
     return dir;
 }
 
-function isAddress(){
-    //For now, no getNetWriteStream exist, so it prevents it
-    //by being only false!
+function isAddress(value){
+    let addrRgx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/; //Got from https://ihateregex.io/expr/url/
+    let ipAddrRgx = /((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/;
+    if(addrRgx.test(value) || ipAddrRgx.test(value)) return true;
     return false;
 }
 
-function getNetWriteStream(){}
+function getNetWriteStream(addr){
+    return new SimpleHttpMq(addr);
+}

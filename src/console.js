@@ -1,6 +1,5 @@
 /*
 Better names for printing in the console!
-Copyright (C) 2022  Thiago Vaz
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,7 +21,7 @@ import * as glbs from "./globals.js";
 import getClassMethodsAndProps from "./utils/getClassMethodsAndProps.js";
 import getStream from "./utils/getStream.js";
 import getEnv from "./utils/getEnv.js";
-import { Console } from "console";
+import { Console } from "console"; //TODO: make dynamic!
 
 class Cons {
     constructor(options){
@@ -33,6 +32,7 @@ class Cons {
 
     getCons(){
 	this.console = new Console(this.options);
+	this.console.print = this.console.log;
 	if(this.proxy) return new Proxy(this.console, this.proxy);
 	return this.console;
     }
@@ -58,8 +58,8 @@ var OPTIONS = await optionsFactory(
 
 var c = new Cons(OPTIONS);
 var p = new Proxy(c, {
-    get: function(target, prop, receiver){
-	// Lazy init for the console object,
+    get: function(target, prop){
+	// Lazy initing the console object,
 	// only start it when someone tries to use it!
 	// on start, makes itself the console or proxy object.
 	if(!(propsAndMethods.includes(prop))){
@@ -82,8 +82,8 @@ async function optionsFactory(
     groupIndentation){
     
     let opt = {};
-    opt.stdout = await getStream(stdout, "STDOUT") || glbs.STDOUT;
-    opt.stderr = await getStream(stderr, "STDERR") || glbs.STDERR;
+    opt.stdout = await getStream(stdout, "STDOUT") || glbs._STDOUT;
+    opt.stderr = await getStream(stderr, "STDERR") || glbs._STDERR;
     opt.ignoreErrors = ignoreErrors || true;
     opt.colorMode = colorMode || "auto";
     opt.groupIndentation = groupIndentation || 2;
