@@ -20,7 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import cons from "./console.js";
 
-//TODO: make an option for warning the aliases like debug()
 var print = printFactoryLazy("print");
 var log = printFactoryLazy("log");
 var warn = printFactoryLazy("warn");
@@ -29,9 +28,7 @@ var table = printFactoryLazy("table");
 var count = printFactoryLazy("count");
 var assert = printFactoryLazy("assert");
 var clear = printFactoryLazy("clear");
-var debug = function(){
-    throw new Error("Use print() instead"); // debug is a alias for console.log, so is print, then, no debug();
-}
+var debug = printFactoryLazy("debug");
 var error = printFactoryLazy("error");
 var trace = printFactoryLazy("trace");
 

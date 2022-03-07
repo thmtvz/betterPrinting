@@ -18,13 +18,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
-async function wait(time){
-    return new Promise(function(res, rej){
-	setTimeout(res, time * 1000);
-    });
+import fs from "fs/promises";
+
+async function getFileAppendStream(filename){
+    let file =  await fs.open(filename, "a");
+    let stream = file.createWriteStream();
+    return stream;
 }
 
 export{
-    wait as default,
+    getFileAppendStream as default,
     
 }

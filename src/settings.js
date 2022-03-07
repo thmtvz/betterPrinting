@@ -29,12 +29,6 @@ function setConsProxy(prx){
     cons.makeProxy(prx);
 }
 
-//-> augment input
-//-> filter input
-//-> replace input
-//-> intercept calls
-//-> observe calls
-// make a function that will return a function depending on some factors
 class PrxSettings {
     constructor(consObj){
 	this.augmentList = new Map();
@@ -114,7 +108,7 @@ class PrxSettings {
     }
 
     augmentSome(...args){
-	if(args.length < 3) return; // error!
+	if(args.length < 3) throw new Error("Insuficient arguments");
 	let mod = args[-2];
 	let pos = args[-1];
 	for(let i = 0; i < args.length -2; i++){
@@ -129,7 +123,7 @@ class PrxSettings {
     }
 
     filterSome(...args){
-	if(args.length > 2) return; //error
+	if(args.length > 2) throw new Error("Insuficient arguments");
 	let filter = args[-1];
 	for(let i = 0; i < args.length -1;i++){
 	    this.filter(args[i], filter);
@@ -143,7 +137,7 @@ class PrxSettings {
     }
 
     replaceSome(...args){
-	if(args.length < 3) return; //error!
+	if(args.length < 3) throw new Error("Insuficient arguments");
 	let replacee = args[-2];
 	let replacementValue = args[-1];
 	for(let i = 0; i < args.length - 2;i++){
@@ -158,7 +152,7 @@ class PrxSettings {
     }
 
     interceptSome(...args){
-	if(args.length < 2) return; //error
+	if(args.length < 2) throw new Error("Insuficient arguments");
 	let action = args[-1];
 	for(let i = 0; i < args.length -1; i++){
 	    this.intercept(args[i], action);
@@ -172,7 +166,7 @@ class PrxSettings {
     }
 
     observeSome(...args){
-	if(args.length < 2) return; //error
+	if(args.length < 2) throw new Error("Insuficient arguments");
 	let callBack = args[-1];
 	for(let i = 0; i < args.length -1;i++){
 	    this.observe(args[i], callBack);

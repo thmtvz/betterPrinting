@@ -16,13 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// move file related stuff to its own file
 "use strict";
 
-import fs from "fs/promises";
+//TODO: remove path and fs from here
 import path from "path";
-import SimpleHttpMq from "./simpleHttpMq.js";
-
+import fs from "fs/promises";
+import getFileAppendStream from "./getFileAppendStream.js";
+import getNetWriteStream from "./getNetWriteStream.js";
 
 async function getStream(intendedValue, intendedFor){
     //This is intended for settings via enviroment only.
@@ -47,12 +47,6 @@ async function isFileNameAllowed(filename){
     return true;
 }
 
-async function getFileAppendStream(filename){
-    let file =  await fs.open(filename, "a");
-    let stream = file.createWriteStream();
-    return stream;
-}
-
 async function getDir(dirname){
     try{
 	var dir = fs.readdir(dirname, {});
@@ -67,8 +61,4 @@ function isAddress(value){
     let ipAddrRgx = /((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/;
     if(addrRgx.test(value) || ipAddrRgx.test(value)) return true;
     return false;
-}
-
-function getNetWriteStream(addr){
-    return new SimpleHttpMq(addr);
 }

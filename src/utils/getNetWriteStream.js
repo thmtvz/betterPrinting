@@ -18,13 +18,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
-async function wait(time){
-    return new Promise(function(res, rej){
-	setTimeout(res, time * 1000);
-    });
+import SimpleHttpMq from "./simpleHttpMq.js";
+
+function getNetWriteStream(addr){
+    return new SimpleHttpMq(addr);
 }
 
 export{
-    wait as default,
+    getNetWriteStream as default,
     
 }

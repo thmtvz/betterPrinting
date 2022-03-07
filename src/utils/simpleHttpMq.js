@@ -18,13 +18,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 "use strict";
 
-import fs from "fs/promises";
-//TODO: change this when move file functionalitty from getStream.js
-import stream from "stream";
+import {Writable} from "stream";
 import wait from "./wait.js";
 import * as requests from "./requests.js";
+import getFileAppendStream from "./getFileAppendStream.js";
 
-class SimpleHttpMq extends stream.Writable {
+class SimpleHttpMq extends Writable {
     constructor(addr, method = "POST", tryHttp = true, acceptedReturnCodes = [200], maxRetries = 100,
 		standardWaitTime = 0.5, timeInciment = 0.1, numRetriesToInc = 25){
 	super({objectMode: true});
@@ -47,8 +46,6 @@ class SimpleHttpMq extends stream.Writable {
     }
 
     async httpSend(contents){
-	return Promise.resolve(false);
-	//TEMP
 	try {
 	    let reqst = await requests.httpsReq(this.addr, contents, "POST");
 	    if(this.acceptedReturnCodes.indexOf(reqst.statusCode) !== -1){
@@ -88,8 +85,7 @@ class SimpleHttpMq extends stream.Writable {
 
     async retry(){
 	if(this.reqCount > this.maxRetries){
-	    let file = await fs.open("./.notSent.log", "a", 0o600);
-	    let stream = file.createWriteStream();
+	    let stream = await getFileAppendStream("./.notSent.log");
 	    let all = "";
 	    while(this.queue.length){
 		all += this.queue.pop();
@@ -116,10 +112,3 @@ export{
     SimpleHttpMq as default,
     
 }
-let teste = new SimpleHttpMq();
-for(let i = 0; i < 100; i++){
-    teste.write(`${i}\n`);
-}
-
-await wait(2);
-console.log(teste);

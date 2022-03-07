@@ -60,7 +60,3 @@ export {
     httpsReq,
     httpReq,
 }
-
-// let teste = await httpsReq("https://www.youtube.com");
-
-// console.log(teste.statusCode);

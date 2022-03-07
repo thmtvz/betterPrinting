@@ -48,7 +48,7 @@ class Cons {
 
 var propsAndMethods = getClassMethodsAndProps(Cons, new Cons({}));
 
-var OPTIONS = await optionsFactory(
+var OPTIONS = await optionsBuilder(
     getEnv("STDOUT"),
     getEnv("STDERR"),
     getEnv("IGNORE_ERRORS"),
@@ -62,30 +62,33 @@ var p = new Proxy(c, {
 	// Lazy initing the console object,
 	// only start it when someone tries to use it!
 	// on start, makes itself the console or proxy object.
+	// once some prop thats belongs to the console is accessed,
+	// the console is no longer configurable.
 	if(!(propsAndMethods.includes(prop))){
 	    p = c.getCons();
 	    return p[prop];
 	}
 	return target[prop];
     }
-})
+});
 
 export {
     p as default,
+    
 }
 
-async function optionsFactory(
+async function optionsBuilder(
     stdout,
     stderr,
-    ignoreErrors,
-    colorMode,
-    groupIndentation){
+    ignoreErrors = true,
+    colorMode = "auto",
+    groupIndentation = 2 ){
     
     let opt = {};
     opt.stdout = await getStream(stdout, "STDOUT") || glbs._STDOUT;
     opt.stderr = await getStream(stderr, "STDERR") || glbs._STDERR;
-    opt.ignoreErrors = ignoreErrors || true;
-    opt.colorMode = colorMode || "auto";
-    opt.groupIndentation = groupIndentation || 2;
+    opt.ignoreErrors = ignoreErrors;
+    opt.colorMode = colorMode;
+    opt.groupIndentation = groupIndentation;
     return opt;
 }
