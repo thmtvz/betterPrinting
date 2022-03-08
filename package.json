@@ -1,9 +1,10 @@
 {
   "name": "betterprinting",
   "version": "0.0.2",
-  "description": "Alternative for writing console dot whatever all the time",
-  "main": "src/index.js",
+  "description": "A console framework, allowing to manipulate its behaviours. Also, provides all functions as aliases, so you wont waste keystrokes!",
+  "main": "lib/index.js",
   "type": "module",
+  "packageManager": "npm",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,10 +13,9 @@
     "url": "git+https://github.com/thmtvz/betterPrinting.git"
   },
   "keywords": [
-    "laziness",
+    "Console",
     "console.log",
     "printf",
-    "puts",
     "print"
   ],
   "author": "Thiago Vaz",
