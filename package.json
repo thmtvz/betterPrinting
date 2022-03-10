@@ -1,6 +1,6 @@
 {
   "name": "betterprinting",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A console framework, allowing to manipulate its behaviours. Also, provides all functions as aliases, so you wont waste keystrokes!",
   "main": "lib/index.js",
   "type": "module",
