@@ -1,5 +1,4 @@
 # betterPrinting #
-==============
 
 ```js
 import print from "betterPrinting";
@@ -12,7 +11,6 @@ print("Hello, world!");
 betterPrinting at its most basic usage spares a few keystrokes, providing aliases for every console function, along with adding the print() method(console.log alias). It exposes facilities to control the ending output of aconsole call, along with interfaces to configure the behaviour of the outputign itself eg. to a file instead ofstandard output.
 
 #### Simple usage ####
-=====================
 ```js
 import {
 	print,
@@ -28,7 +26,6 @@ print("Hello :)"); //1646933984106 Hello :)
 ```
 
 #### Configuring ####
-====================
 
 betterPriting starts checking if you have an .env file, in the format "PROPERTY=value". The casing don't really matter, but the values expected to configuring the behaviour are all uppercased by convention. The values it looks for are the following:
 
@@ -46,7 +43,6 @@ Both STDOUT and STDERR expect either a filename, an http adress or an ip address
 ---
 
 ##### extending console output #####
-===================================
 
 The extending is made by proxying the Console object. betterPrinting provides a few facilities for this:
 
@@ -81,7 +77,7 @@ import {PrxSettings} from "betterPrinting/settings";
 new PrxSettings()
 	.augment("print", "LOG: ", "start") // prefer using the PRINT constant from the globals module!
 	.replace("print", "sad emoji :(", "happy emoji :)")
-	.inject(); // you can get the final proxy via .build() method, inject automate the proxy insertion into console obj
+	.inject(); // you can get the final proxy via .build() method, inject automate the proxy insertion into console object
 	
 print("sad emoji :("); // outputs happy emoji :) in a out.log file
 error("im not in a file"); // im not in a file
