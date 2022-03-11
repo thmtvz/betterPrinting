@@ -1,27 +1,32 @@
 {
-  "name": "betterprinting",
-  "version": "0.0.3",
-  "description": "A console framework, allowing to manipulate its behaviours. Also, provides all functions as aliases, so you wont waste keystrokes!",
-  "main": "lib/index.js",
-  "type": "module",
-  "packageManager": "npm",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thmtvz/betterPrinting.git"
-  },
-  "keywords": [
-    "Console",
-    "console.log",
-    "printf",
-    "print"
-  ],
-  "author": "Thiago Vaz",
-  "license": " GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/thmtvz/betterPrinting/issues"
-  },
-  "homepage": "https://github.com/thmtvz/betterPrinting#readme"
+    "name": "betterprinting",
+    "version": "0.0.3",
+    "description": "A console framework, allowing to manipulate its behaviours. Also, provides all functions as aliases, so you wont waste keystrokes!",
+    "main": "./lib/index.js",
+    "exports": {
+	".": "./lib/index.js",
+	"./print": "./lib/print.js",
+	"./settings": "./lib/settings.js",
+	"./timing": "./lib/timing.js"
+    },
+    "type": "module",
+    "packageManager": "npm",
+    "scripts": {
+	"test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+	"type": "git",
+	"url": "git+https://github.com/thmtvz/betterPrinting.git"
+    },
+    "keywords": [
+	"console",
+	"console.log",
+	"print"
+    ],
+    "author": "Thiago Vaz",
+    "license": " GPL-3.0-or-later",
+    "bugs": {
+	"url": "https://github.com/thmtvz/betterPrinting/issues"
+    },
+    "homepage": "https://github.com/thmtvz/betterPrinting#readme"
 }
