@@ -8,7 +8,7 @@ print("Hello, world!");
 
 #### console extending framework! ####
 
-betterPrinting at its most basic usage spares a few keystrokes, providing aliases for every console function, along with adding the print() method(console.log alias). It exposes facilities to control the ending output of aconsole call, along with interfaces to configure the behaviour of the outputign itself eg. to a file instead ofstandard output.
+betterPrinting at its most basic usage spares a few keystrokes, providing aliases for every console function, along with adding the print method(console.log alias). It exposes facilities to control the ending output of aconsole call, along with interfaces to configure the behaviour of the outputign itself eg. to a file instead of standard output.
 
 #### Simple usage ####
 ```js
