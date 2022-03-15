@@ -7,7 +7,8 @@
 	".": "./lib/index.js",
 	"./print": "./lib/print.js",
 	"./settings": "./lib/settings.js",
-	"./timing": "./lib/timing.js"
+	"./timing": "./lib/timing.js",
+	"./globals": "./lib/globals.js"
     },
     "type": "module",
     "packageManager": "npm",

@@ -8,7 +8,7 @@ print("Hello, world!");
 
 #### console extending framework! ####
 
-betterPrinting at its most basic usage spares a few keystrokes, providing aliases for every console function, along with adding the print method(console.log alias). It exposes facilities to control the ending output of aconsole call, along with interfaces to configure the behaviour of the outputign itself eg. to a file instead of standard output.
+betterPrinting at its most basic usage spares a few keystrokes, providing aliases for every console function, along with adding the print method(console.log alias). It exposes facilities to control the ending output of a console call, along with interfaces to configure the behavior of the outputign itself eg. to a file instead of standard output.
 
 #### Simple usage ####
 ```js
@@ -27,7 +27,7 @@ print("Hello :)"); //1646933984106 Hello :)
 
 #### Configuring ####
 
-betterPriting starts checking if you have an .env file, in the format "PROPERTY=value". The casing don't really matter, but the values expected to configuring the behaviour are all uppercased by convention. The values it looks for are the following:
+betterPriting starts checking if you have an .env file, in the format "PROPERTY=value". The casing don't really matter, but the values expected to configure the behavior are all uppercased by convention. The values it looks for are the following:
 
 **envVar**
 * STDOUT
@@ -36,9 +36,9 @@ betterPriting starts checking if you have an .env file, in the format "PROPERTY=
 * COLOR_MODE
 * GROUP_INDENTATION
 
-It's advised to only mess with STDOUT and STDERR, but you have total freedom to config in you liking.
+It's advised to only mess with STDOUT and STDERR, but you have total freedom to config in your liking.
 
-Both STDOUT and STDERR expect either a filename, an http adress or an ip address. The other options are further covered in the docs.
+Both STDOUT and STDERR expect either a filename, an http address or an ip address. The other options are further covered in the docs.
 
 ---
 
@@ -51,7 +51,7 @@ The extending is made by proxying the Console object. betterPrinting provides a 
 
 setConsProxy function lets you use a totaly custom proxy. This is furthered covered in docs.
 
-PrxSettings is the main method for extendind the Console behaviour. It provides a interface with the following facilities:
+PrxSettings is the main method for extendind the Console behavior. It provides a interface with the following facilities:
 
 * augmenting
 * replacing
@@ -59,7 +59,7 @@ PrxSettings is the main method for extendind the Console behaviour. It provides 
 * intercepting
 * observing
 
-The names are enougthly sugesting. They take the input values for the Console call, and operate on it before calling the Console itself. You can use plain values, but you can also work with functions, so you get a very dynamical experience. See examples for further clarification.
+The names are suggesting by nature. They take the input values for the Console call, and operate on it before calling the Console itself. You can use plain values, but you can also work with functions, so you get a very dynamical experience. See examples for further clarification.
 
 ---
 
